@@ -7,7 +7,7 @@
     </context-param>
     <servlet>
         <servlet-name>NanoScrollPanel Demo Application</servlet-name>
-        <servlet-class>org.vaadin.hhe.nanoscrollpanel.demo.NanoScrollPanelDemoServlet</servlet-class>
+        <servlet-class>com.vaadin.server.VaadinServlet</servlet-class>
         <init-param>
             <param-name>UI</param-name>
             <param-value>org.vaadin.hhe.nanoscrollpanel.demo.NanoScrollPanelDemoUI</param-value>

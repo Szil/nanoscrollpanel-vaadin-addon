@@ -7,6 +7,7 @@
 **/target/*
 **/bin/*
 **/build/*
+**/src/main/webapp/VAADIN/*
 
 # Package Files #
 *.jar

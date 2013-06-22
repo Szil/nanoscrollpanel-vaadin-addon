@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONNumber;
 import com.google.gwt.json.client.JSONObject;
@@ -101,7 +103,12 @@ public class GwtNanoScrollPanel extends SimplePanel {
     
     @Override
     public void onLoad() {
-        buildScroller(this, getElement().getId(), scrollerOptions.getJavaScriptObject());
+        Scheduler.get().scheduleFinally(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                buildScroller(GwtNanoScrollPanel.this, getElement().getId(), scrollerOptions.getJavaScriptObject());
+            }
+        });
     }
     
     @Override
@@ -174,19 +181,20 @@ public class GwtNanoScrollPanel extends SimplePanel {
      */
     // $wnd.$('#'+id).children('.pane').css("display", "block");
     private native void buildScroller(GwtNanoScrollPanel panel, String id, JavaScriptObject options) /*-{
-        $wnd.$('#'+id).bind("scrollend", function(e) {
+        var panelDiv = $wnd.$('#'+id);
+        panelDiv.bind("scrollend", function(e) {
             panel.@org.vaadin.hhe.nanoscrollpanel.gwt.client.GwtNanoScrollPanel::onScrollEnd(Lcom/google/gwt/user/client/Event;)(e);
         });
-        $wnd.$('#'+id).bind("scrolltop", function(e) {
+        panelDiv.bind("scrolltop", function(e) {
             panel.@org.vaadin.hhe.nanoscrollpanel.gwt.client.GwtNanoScrollPanel::onScrollTop(Lcom/google/gwt/user/client/Event;)(e);
         });
-        $wnd.$('#'+id).nanoScroller(options);
+        panelDiv.nanoScroller(options);
         
-        $wnd.$('#'+id).find('.content').first().bind('DOMNodeInserted DOMNodeRemoved', function(e) {
-            $wnd.$('#'+id).nanoScroller();
+        panelDiv.find('.content').first().bind('DOMNodeInserted DOMNodeRemoved', function(e) {
+            panelDiv.nanoScroller();
         });
-        $wnd.$('#'+id).bind('heightChange', function(e) {
-            $wnd.$('#'+id).nanoScroller();
+        panelDiv.bind('heightChange', function(e) {
+            panelDiv.nanoScroller();
         });
     }-*/;
     

@@ -2,11 +2,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.vaadin.addons</groupId>
   <artifactId>nanoscrollpanel-demo</artifactId>
-  <version>0.1.3</version>
+  <version>0.1.4</version>
   <packaging>war</packaging>
   
   <properties>
-        <nanoscrollpanel.version>0.1.1</nanoscrollpanel.version>
+        <nanoscrollpanel.version>0.1.4</nanoscrollpanel.version>
         <Implementation-Version>${project.version}</Implementation-Version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,7 +56,7 @@
         <dependency>
             <groupId>org.vaadin.addons</groupId>
             <artifactId>nanoscrollpanel</artifactId>
-            <version>0.1.3</version>
+            <version>${nanoscrollpanel.version}</version>
         </dependency>
         <dependency>
             <groupId>com.vaadin</groupId>
@@ -183,7 +183,7 @@
                 <version>6.1.24</version>
                 <configuration>
                     <stopPort>9966</stopPort>
-                    <stopKey>fancylayouts</stopKey>
+                    <stopKey>nanoscrollpanel</stopKey>
                     <scanIntervalSeconds>0</scanIntervalSeconds>
                     <!-- make sure Jetty also finds the widgetset -->
                     <webAppConfig>

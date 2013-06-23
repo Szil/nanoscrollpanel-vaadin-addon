@@ -20,6 +20,8 @@ public class NanoScrollPanelDemoUI extends UI {
         final NanoScrollPanel nPanel = new NanoScrollPanel();
         nPanel.setWidth("400px");
         nPanel.setHeight("400px");
+        nPanel.flashScrollbar();
+        nPanel.setPreventPageScrolling(true);
         
         final VerticalLayout vLayout = new VerticalLayout();
         for(int i=0; i<50; ++i) {
@@ -64,6 +66,19 @@ public class NanoScrollPanelDemoUI extends UI {
         });
         
         nPanel.setContent(vLayout);
-        setContent(nPanel);
+        
+        VerticalLayout overallLayout = new VerticalLayout();
+        overallLayout.addComponent(nPanel);
+        
+        Button flashBtn = new Button("Flash Scrollbar");
+        flashBtn.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                nPanel.flashScrollbar();
+            }
+        });
+        overallLayout.addComponent(flashBtn);
+        
+        setContent(overallLayout);
     }
 }

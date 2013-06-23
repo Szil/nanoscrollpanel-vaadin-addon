@@ -58,8 +58,6 @@ public enum NanoScrollOption {
      */
     ALWAYS_VISIBLE("alwaysVisible"),
     
-    FLASH("flash"),
-    
     /**
      * Use this setting to specify the scrollbar hide delay in milliseconds 
      * if you have enabled the flash option.

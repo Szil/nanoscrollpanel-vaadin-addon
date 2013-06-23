@@ -25,12 +25,15 @@ public class GwtNanoScrollPanel extends SimplePanel {
     
     private List<NanoScrollListener> listeners = new ArrayList<NanoScrollListener>();
     
+    private String id;
+    
     public GwtNanoScrollPanel() {
         this(GUID.get(15));
     }
     
     public GwtNanoScrollPanel(String id) {
         getElement().setId(id);
+        this.id = id;
         getElement().addClassName("nano");
         // to enable ios native scroll
 //        getElement().getStyle().setProperty("WebkitOverflowScrolling", "touch");
@@ -54,15 +57,6 @@ public class GwtNanoScrollPanel extends SimplePanel {
     
     private void setElementOption(String key, Widget widget) {
         scrollerOptions.put(key, JSONParser.parseStrict("$(#"+widget.getElement().getId()+")"));
-    }
-    
-    public void flashScrollbar() {
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-            @Override
-            public void execute() {
-                nativeFlashScrollbar(getElement().getId());
-            }
-        });
     }
     
     public void setFlashDelay(int flashDelay) {
@@ -111,8 +105,7 @@ public class GwtNanoScrollPanel extends SimplePanel {
         Scheduler.get().scheduleFinally(new ScheduledCommand() {
             @Override
             public void execute() {
-                nativeBuildScroller( GwtNanoScrollPanel.this, 
-                        getElement().getId(), 
+                nativeBuildScroller( GwtNanoScrollPanel.this, id, 
                         scrollerOptions.getJavaScriptObject() );
             }
         });
@@ -121,12 +114,12 @@ public class GwtNanoScrollPanel extends SimplePanel {
     @Override
     public void setWidget(Widget w) {
         super.setWidget(w);
-        nativeUpdateScroller(getElement().getId());
+        nativeUpdateScroller(id);
     }
     
     @Override
     public void onUnload() {
-        nativeDestroyScroller(getElement().getId());
+        destroyScroller();
     }
     
     public void addListener(NanoScrollListener l) {
@@ -174,13 +167,34 @@ public class GwtNanoScrollPanel extends SimplePanel {
     @Override
     public void setHeight(String height) {
         super.setHeight(height);
-        nativeTriggerEvent(getElement().getId(), "heightChange");
+        nativeTriggerEvent(id, "heightChange");
     }
     
     @Override
     public void setWidth(String width) {
         super.setWidth(width);
-        nativeTriggerEvent(getElement().getId(), "widthChange");
+        nativeTriggerEvent(id, "widthChange");
+    }
+    
+    public void flashScrollbar() {
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+            @Override
+            public void execute() {
+                nativeFlashScrollbar(id);
+            }
+        });
+    }
+    
+    public void scrollTop(int offset) {
+        nativeScrollTop(id, offset);
+    }
+    
+    public void scrollBottom(int offset) {
+        nativeScrollBottom(id, offset);
+    }
+    
+    public void destroyScroller() {
+        nativeFlashScrollbar(id);
     }
     
     /*
@@ -223,6 +237,18 @@ public class GwtNanoScrollPanel extends SimplePanel {
     private native void nativeFlashScrollbar(String id) /*-{
         $wnd.$('#'+id).nanoScroller({
             flash : true
+        });
+    }-*/;
+    
+    private native void nativeScrollTop(String id, int offset) /*-{
+        $wnd.$('#'+id).nanoScroller({
+            scrollTop : offset
+        });
+    }-*/;
+    
+    private native void nativeScrollBottom(String id, int offset) /*-{
+        $wnd.$('#'+id).nanoScroller({
+            scrollBottom : offset
         });
     }-*/;
 }

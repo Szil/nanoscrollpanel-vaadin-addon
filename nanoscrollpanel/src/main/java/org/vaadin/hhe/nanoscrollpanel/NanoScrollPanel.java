@@ -16,6 +16,8 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
 
     private static final long serialVersionUID = -2168758555251706761L;
     
+    private final NanoScrollClientRpc clientRpc = getRpcProxy(NanoScrollClientRpc.class);
+    
     @Override
     protected NanoScrollPanelState getState() {
         return (NanoScrollPanelState) super.getState();
@@ -30,10 +32,30 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
     }
     
     public void flashScrollbar() {
-        getRpcProxy(NanoScrollClientRpc.class).flashScrollbar();
+        clientRpc.flashScrollbar();
     }
     
     public void setFlashDelay(int flashDelay) {
         getState().flashDelay = flashDelay;
     }
+    
+    public void scrollTop(int offset) {
+        clientRpc.scrollTop(offset);
+    }
+    
+    public void scrollToTop() {
+        clientRpc.scrollTop(1);
+    }
+    
+    public void scrollBottom(int offset) {
+        clientRpc.scrollBottom(offset);
+    }
+    
+    public void scrollToBottom() {
+        clientRpc.scrollBottom(1);
+    }
+    
+//    public void destroy() {
+//        clientRpc.destory();
+//    }
 }

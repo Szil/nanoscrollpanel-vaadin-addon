@@ -23,6 +23,21 @@ public class NanoScrollPanelConnector extends AbstractSingleComponentContainerCo
         public void flashScrollbar() {
             getWidget().flashScrollbar();
         }
+
+        @Override
+        public void scrollTop(int offset) {
+            getWidget().scrollTop(offset);
+        }
+
+        @Override
+        public void scrollBottom(int offset) {
+            getWidget().scrollBottom(offset);
+        }
+
+        @Override
+        public void destory() {
+            getWidget().destroyScroller();
+        }
         
     };
     

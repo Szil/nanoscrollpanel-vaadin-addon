@@ -79,6 +79,26 @@ public class NanoScrollPanelDemoUI extends UI {
         });
         overallLayout.addComponent(flashBtn);
         
+        Button scrollTopBtn = new Button("Scroll To Top");
+        scrollTopBtn.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                nPanel.flashScrollbar();
+                nPanel.scrollToTop();
+            }
+        });
+        overallLayout.addComponent(scrollTopBtn);
+        
+        Button scrollBottomBtn = new Button("Scroll To Bottom");
+        scrollBottomBtn.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                nPanel.flashScrollbar();
+                nPanel.scrollToBottom();
+            }
+        });
+        overallLayout.addComponent(scrollBottomBtn);
+        
         setContent(overallLayout);
     }
 }

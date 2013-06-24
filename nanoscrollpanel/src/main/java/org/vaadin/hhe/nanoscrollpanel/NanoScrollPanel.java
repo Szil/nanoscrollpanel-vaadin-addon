@@ -5,6 +5,7 @@ import org.vaadin.hhe.nanoscrollpanel.gwt.client.shared.NanoScrollPanelState;
 
 import com.vaadin.annotations.JavaScript;
 import com.vaadin.ui.AbstractSingleComponentContainer;
+import com.vaadin.ui.Component;
 
 @JavaScript({
     "jquery.min.js",
@@ -31,6 +32,14 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
         getState().alwaysVisible = alwaysVisible;
     }
     
+    public void setIOSNativeScrolling(boolean iOSNativeScrolling) {
+        getState().iOSNativeScrolling = iOSNativeScrolling;
+    }
+    
+    public void setDisableResize(boolean disableResize) {
+        getState().disableResize = disableResize;
+    }
+    
     public void flashScrollbar() {
         clientRpc.flashScrollbar();
     }
@@ -55,7 +64,23 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
         clientRpc.scrollBottom(1);
     }
     
-//    public void destroy() {
-//        clientRpc.destory();
-//    }
+    public void scrollTo(Component target) {
+        if(target.getId()==null) return;
+        
+        boolean foundParent = false;
+        Component parent = target.getParent();
+        while(parent!=null && !foundParent) {
+            if(parent==this) 
+                foundParent = true;
+            else
+                parent = parent.getParent();
+        }
+        if(!foundParent) return;
+        
+        scrollTo(target.getId());
+    }
+    
+    public void scrollTo(String targetId) {
+        clientRpc.scrollTo(targetId);
+    }
 }

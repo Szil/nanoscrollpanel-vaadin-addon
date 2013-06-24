@@ -38,6 +38,11 @@ public class NanoScrollPanelConnector extends AbstractSingleComponentContainerCo
         public void destory() {
             getWidget().destroyScroller();
         }
+
+        @Override
+        public void scrollTo(String widgetId) {
+            getWidget().scrollTo(widgetId);
+        }
         
     };
     
@@ -79,6 +84,12 @@ public class NanoScrollPanelConnector extends AbstractSingleComponentContainerCo
         }
         if(stateChangeEvent.hasPropertyChanged("flashDelay")) {
             getWidget().setFlashDelay(getState().flashDelay);
+        }
+        if(stateChangeEvent.hasPropertyChanged("iOSNativeScrolling")) {
+            getWidget().setIOSNativeScrolling(getState().iOSNativeScrolling);
+        }
+        if(stateChangeEvent.hasPropertyChanged("disableResize")) {
+            getWidget().setDisableResize(getState().disableResize);
         }
     }
 }

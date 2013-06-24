@@ -45,18 +45,22 @@ public class GwtNanoScrollPanel extends SimplePanel {
     
     private void setBooleanOption(String key, boolean value) {
         scrollerOptions.put(key, JSONBoolean.getInstance(value));
+        updateScroller();
     }
     
     private void setIntegerOption(String key, int value) {
         scrollerOptions.put(key, new JSONNumber(value));
+        updateScroller();
     }
     
     private void setStringOption(String key, String value) {
         scrollerOptions.put(key, new JSONString(value));
+        updateScroller();
     }
     
     private void setElementOption(String key, Widget widget) {
         scrollerOptions.put(key, JSONParser.parseStrict("$(#"+widget.getElement().getId()+")"));
+        updateScroller();
     }
     
     public void setFlashDelay(int flashDelay) {
@@ -71,6 +75,14 @@ public class GwtNanoScrollPanel extends SimplePanel {
         setBooleanOption(NanoScrollOption.ALWAYS_VISIBLE.toString(), isAlwaysVisible);
     }
     
+    public void setIOSNativeScrolling(boolean iOSNativeScrolling) {
+        setBooleanOption(NanoScrollOption.IOS_NATIVE_SCROLLING.toString(), iOSNativeScrolling);
+    }
+    
+    public void setDisableResize(boolean disableResize) {
+        setBooleanOption(NanoScrollOption.DISABLE_RESIZE.toString(), disableResize);
+    }
+    
     public void setPanelClassName(String className) {
         setStringOption(NanoScrollOption.PANEL_CLASS.toString(), className);
     }
@@ -81,18 +93,6 @@ public class GwtNanoScrollPanel extends SimplePanel {
     
     public void setContentClassName(String className) {
         setStringOption(NanoScrollOption.CONTENT_CLASS.toString(), className);
-    }
-    
-    public void setScrollTop(int offset) {
-        setIntegerOption(NanoScrollOption.SCROLL_TOP.toString(), offset);
-    }
-    
-    public void setScrollBottom(int offset) {
-        setIntegerOption(NanoScrollOption.SCROLL_BOTTOM.toString(), offset);
-    }
-    
-    public void setScrollTo(Widget widget) {
-        setElementOption(NanoScrollOption.SCROLL_TO.toString(), widget);
     }
     
     @Override
@@ -111,10 +111,14 @@ public class GwtNanoScrollPanel extends SimplePanel {
         });
     }
     
+    protected void updateScroller() {
+        if(isAttached()) nativeUpdateScroller(id);
+    }
+    
     @Override
     public void setWidget(Widget w) {
         super.setWidget(w);
-        nativeUpdateScroller(id);
+        updateScroller();
     }
     
     @Override
@@ -193,6 +197,10 @@ public class GwtNanoScrollPanel extends SimplePanel {
         nativeScrollBottom(id, offset);
     }
     
+    public void scrollTo(String widgetId) {
+        nativeScrollTo(id, widgetId);
+    }
+    
     public void destroyScroller() {
         nativeFlashScrollbar(id);
     }
@@ -250,5 +258,15 @@ public class GwtNanoScrollPanel extends SimplePanel {
         $wnd.$('#'+id).nanoScroller({
             scrollBottom : offset
         });
+    }-*/;
+    
+    private native void nativeScrollTo(String id, String widgetId) /*-{
+        var panelDiv = $wnd.$('#'+id);
+        var targetWidget = panelDiv.find('#'+widgetId).first();
+        if(targetWidget!=null) {
+            panelDiv.nanoScroller({
+                scrollTo : targetWidget
+            });
+        }
     }-*/;
 }

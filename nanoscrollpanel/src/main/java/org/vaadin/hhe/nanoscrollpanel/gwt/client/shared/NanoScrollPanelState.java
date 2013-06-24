@@ -12,4 +12,8 @@ public class NanoScrollPanelState extends AbstractComponentState {
     
     public int flashDelay = 1500;
     
+    public boolean iOSNativeScrolling = false;
+    
+    public boolean disableResize = false;
+    
 }

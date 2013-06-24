@@ -6,6 +6,7 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -13,6 +14,8 @@ import com.vaadin.ui.VerticalLayout;
 public class NanoScrollPanelDemoUI extends UI {
 
     private static final long serialVersionUID = 7992657815796718844L;
+    
+    private Component scrollToTarget = null;
     
     @SuppressWarnings("serial")
     @Override
@@ -25,7 +28,10 @@ public class NanoScrollPanelDemoUI extends UI {
         
         final VerticalLayout vLayout = new VerticalLayout();
         for(int i=0; i<50; ++i) {
-            vLayout.addComponent(new Label("This is a test "+i+"."));
+            Label l = new Label("This is a test "+i+".");
+            l.setId("Label"+i);
+            if(i==25) scrollToTarget = l;
+            vLayout.addComponent(l);
         }
         
         Button btn = new Button("Add more");
@@ -98,6 +104,16 @@ public class NanoScrollPanelDemoUI extends UI {
             }
         });
         overallLayout.addComponent(scrollBottomBtn);
+        
+        Button scrollToBtn = new Button("Scroll To 25");
+        scrollToBtn.addClickListener(new ClickListener() {
+            @Override
+            public void buttonClick(ClickEvent event) {
+                nPanel.flashScrollbar();
+                nPanel.scrollTo(scrollToTarget);
+            }
+        });
+        overallLayout.addComponent(scrollToBtn);
         
         setContent(overallLayout);
     }

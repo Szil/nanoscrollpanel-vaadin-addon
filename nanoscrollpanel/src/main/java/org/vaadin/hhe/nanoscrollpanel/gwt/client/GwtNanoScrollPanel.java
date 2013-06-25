@@ -126,11 +126,11 @@ public class GwtNanoScrollPanel extends SimplePanel {
         destroyScroller();
     }
     
-    public void addListener(NanoScrollListener l) {
+    public void addNanoScrollListener(NanoScrollListener l) {
         listeners.add(l);
     }
     
-    public void removeListener(NanoScrollListener l) {
+    public void removeNanoScrollListener(NanoScrollListener l) {
         listeners.remove(l);
     }
     
@@ -249,15 +249,29 @@ public class GwtNanoScrollPanel extends SimplePanel {
     }-*/;
     
     private native void nativeScrollTop(String id, int offset) /*-{
-        $wnd.$('#'+id).nanoScroller({
-            scrollTop : offset
-        });
+        var panelDiv = $wnd.$('#'+id);
+        if(offset==0) {
+            panelDiv.nanoScroller({
+                scroll : 'top'
+            });
+        } else {
+            panelDiv.nanoScroller({
+                scrollTop : offset
+            });
+        }
     }-*/;
     
     private native void nativeScrollBottom(String id, int offset) /*-{
-        $wnd.$('#'+id).nanoScroller({
-            scrollBottom : offset
-        });
+        var panelDiv = $wnd.$('#'+id);
+        if(offset==0) {
+            panelDiv.nanoScroller({
+                scroll : 'bottom'
+            });
+        } else {
+            panelDiv.nanoScroller({
+                scrollBottom : offset
+            });
+        }
     }-*/;
     
     private native void nativeScrollTo(String id, String widgetId) /*-{

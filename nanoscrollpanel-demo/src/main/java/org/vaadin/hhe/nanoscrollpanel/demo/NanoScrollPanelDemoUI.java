@@ -1,6 +1,8 @@
 package org.vaadin.hhe.nanoscrollpanel.demo;
 
 import org.vaadin.hhe.nanoscrollpanel.NanoScrollPanel;
+import org.vaadin.hhe.nanoscrollpanel.NanoScrollPanel.NanoScrollEvent;
+import org.vaadin.hhe.nanoscrollpanel.NanoScrollPanel.NanoScrollPanelListener;
 
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Button;
@@ -8,6 +10,7 @@ import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -25,6 +28,14 @@ public class NanoScrollPanelDemoUI extends UI {
         nPanel.setHeight("400px");
         nPanel.flashScrollbar();
         nPanel.setPreventPageScrolling(true);
+        nPanel.addNanoScrollListener(new NanoScrollPanelListener() {
+            @Override
+            public void onScroll(NanoScrollEvent event) {
+                Notification.show("NanoScrollEvent catched",
+                        "Event type is "+event.getType(),
+                        Notification.Type.HUMANIZED_MESSAGE);
+            }
+        });
         
         final VerticalLayout vLayout = new VerticalLayout();
         for(int i=0; i<50; ++i) {

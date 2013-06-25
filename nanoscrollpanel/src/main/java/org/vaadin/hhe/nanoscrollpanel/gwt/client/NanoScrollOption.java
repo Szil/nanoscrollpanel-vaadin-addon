@@ -63,13 +63,7 @@ public enum NanoScrollOption {
      * if you have enabled the flash option.
      * Default: 1500
      */
-    FLASH_DELAY("flashDelay"),
-    
-    SCROLL_BOTTOM("scrollBottom"),
-    
-    SCROLL_TOP("scrollTop"),
-    
-    SCROLL_TO("scrollTo");
+    FLASH_DELAY("flashDelay");
     
     private String optionName;
 

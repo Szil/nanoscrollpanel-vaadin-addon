@@ -26,6 +26,7 @@ public class NanoScrollPanelDemoUI extends UI {
         final NanoScrollPanel nPanel = new NanoScrollPanel();
         nPanel.setWidth("400px");
         nPanel.setHeight("400px");
+        // flash user there are more content
         nPanel.flashScrollbar();
         nPanel.setPreventPageScrolling(true);
         nPanel.addNanoScrollListener(new NanoScrollPanelListener() {

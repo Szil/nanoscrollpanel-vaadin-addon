@@ -6,11 +6,14 @@ import org.vaadin.hhe.nanoscrollpanel.gwt.client.NanoScrollEvent;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.NanoScrollListener;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.shared.NanoScrollPanelState;
 
+import com.google.gwt.dom.client.NativeEvent;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractSingleComponentContainerConnector;
+import com.vaadin.client.ui.ClickEventHandler;
+import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.shared.ui.Connect;
 
 @Connect(NanoScrollPanel.class)
@@ -19,6 +22,13 @@ public class NanoScrollPanelConnector extends AbstractSingleComponentContainerCo
     private static final long serialVersionUID = -1002224617479532996L;
     
     private final NanoScrollServerRpc serverRpc = RpcProxy.create(NanoScrollServerRpc.class, this);
+    
+    private ClickEventHandler clickEventHandler = new ClickEventHandler(this) {
+        @Override
+        protected void fireClick(NativeEvent event, MouseEventDetails mouseDetails) {
+            serverRpc.click(mouseDetails);
+        }
+    };
     
     private NanoScrollClientRpc clientRpc = new NanoScrollClientRpc() {
         
@@ -72,7 +82,6 @@ public class NanoScrollPanelConnector extends AbstractSingleComponentContainerCo
 
     @Override
     public void updateCaption(ComponentConnector connector) {
-        
     }
 
     @Override
@@ -94,6 +103,8 @@ public class NanoScrollPanelConnector extends AbstractSingleComponentContainerCo
     @Override
     public void onStateChanged(StateChangeEvent stateChangeEvent) {
         super.onStateChanged(stateChangeEvent);
+        clickEventHandler.handleEventHandlerRegistration();
+        
         if(stateChangeEvent.hasPropertyChanged("preventPageScrolling")) {
             getWidget().setPreventPageScrolling(getState().preventPageScrolling);
         }

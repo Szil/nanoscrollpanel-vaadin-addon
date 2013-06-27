@@ -7,6 +7,10 @@ import org.vaadin.hhe.nanoscrollpanel.gwt.client.connector.NanoScrollServerRpc;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.shared.NanoScrollPanelState;
 
 import com.vaadin.annotations.JavaScript;
+import com.vaadin.event.MouseEvents.ClickEvent;
+import com.vaadin.event.MouseEvents.ClickListener;
+import com.vaadin.shared.EventId;
+import com.vaadin.shared.MouseEventDetails;
 import com.vaadin.ui.AbstractSingleComponentContainer;
 import com.vaadin.ui.Component;
 import com.vaadin.util.ReflectTools;
@@ -42,6 +46,11 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
         @Override
         public void scrollTop() {
             NanoScrollPanel.this.fireEvent(new NanoScrollEvent("top", NanoScrollPanel.this));
+        }
+
+        @Override
+        public void click(MouseEventDetails mouseDetails) {
+            fireEvent(new ClickEvent(NanoScrollPanel.this, mouseDetails));
         }
         
     };
@@ -175,6 +184,34 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
      */
     public void removeNanoScrollListener(NanoScrollPanelListener listener) {
         removeListener(NanoScrollEvent.class, listener, NanoScrollPanelListener.scrollMethod);
+    }
+    
+    /**
+     * Add a click listener to the Panel. The listener is called whenever the
+     * user clicks inside the Panel. Also when the click targets a component
+     * inside the Panel, provided the targeted component does not prevent the
+     * click event from propagating.
+     * 
+     * Use {@link #removeListener(ClickListener)} to remove the listener.
+     * 
+     * @param listener
+     *            The listener to add
+     */
+    public void addClickListener(ClickListener listener) {
+        addListener(EventId.CLICK_EVENT_IDENTIFIER, ClickEvent.class, listener,
+                ClickListener.clickMethod);
+    }
+    
+    /**
+     * Remove a click listener from the Panel. The listener should earlier have
+     * been added using {@link #addListener(ClickListener)}.
+     * 
+     * @param listener
+     *            The listener to remove
+     */
+    public void removeClickListener(ClickListener listener) {
+        removeListener(EventId.CLICK_EVENT_IDENTIFIER, ClickEvent.class,
+                listener);
     }
     
     /**

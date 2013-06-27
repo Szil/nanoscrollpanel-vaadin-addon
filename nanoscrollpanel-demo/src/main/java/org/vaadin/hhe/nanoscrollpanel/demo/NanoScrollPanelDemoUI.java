@@ -37,6 +37,18 @@ public class NanoScrollPanelDemoUI extends UI {
                         Notification.Type.HUMANIZED_MESSAGE);
             }
         });
+        nPanel.addClickListener(new com.vaadin.event.MouseEvents.ClickListener() {
+            @Override
+            public void click(com.vaadin.event.MouseEvents.ClickEvent event) {
+                if(event.isDoubleClick()) {
+                    Notification.show("NanoScrollPanel was double clicked", "Event",
+                            Notification.Type.HUMANIZED_MESSAGE);
+                } else {
+                    Notification.show("NanoScrollPanel was clicked", "Event",
+                            Notification.Type.HUMANIZED_MESSAGE);
+                }
+            }
+        });
         
         final VerticalLayout vLayout = new VerticalLayout();
         for(int i=0; i<50; ++i) {

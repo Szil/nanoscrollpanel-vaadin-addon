@@ -4,6 +4,7 @@ import org.vaadin.hhe.nanoscrollpanel.NanoScrollPanel;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.GwtNanoScrollPanel;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.NanoScrollEvent;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.NanoScrollListener;
+import org.vaadin.hhe.nanoscrollpanel.gwt.client.shared.NanoEventId;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.shared.NanoScrollPanelState;
 
 import com.google.gwt.dom.client.NativeEvent;
@@ -70,12 +71,14 @@ public class NanoScrollPanelConnector extends AbstractSingleComponentContainerCo
         getWidget().addNanoScrollListener(new NanoScrollListener() {
             @Override
             public void onScrollTop(NanoScrollEvent e) {
-                serverRpc.scrollTop();
+                if(hasEventListener(NanoEventId.NANO_SCROLL))
+                    serverRpc.scrollTop();
             }
             
             @Override
             public void onScrollEnd(NanoScrollEvent e) {
-                serverRpc.scrollEnd();
+                if(hasEventListener(NanoEventId.NANO_SCROLL))
+                    serverRpc.scrollEnd();
             }
         });
     }

@@ -4,6 +4,7 @@ import java.lang.reflect.Method;
 
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.connector.NanoScrollClientRpc;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.connector.NanoScrollServerRpc;
+import org.vaadin.hhe.nanoscrollpanel.gwt.client.shared.NanoEventId;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.shared.NanoScrollPanelState;
 
 import com.vaadin.annotations.JavaScript;
@@ -175,7 +176,8 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
      * @param listener
      */
     public void addNanoScrollListener(NanoScrollPanelListener listener) {
-        addListener(NanoScrollEvent.class, listener, NanoScrollPanelListener.scrollMethod);
+        addListener(NanoEventId.NANO_SCROLL, NanoScrollEvent.class, 
+                listener, NanoScrollPanelListener.scrollMethod);
     }
     
     /**
@@ -183,7 +185,7 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
      * @param listener
      */
     public void removeNanoScrollListener(NanoScrollPanelListener listener) {
-        removeListener(NanoScrollEvent.class, listener, NanoScrollPanelListener.scrollMethod);
+        removeListener(NanoEventId.NANO_SCROLL, NanoScrollEvent.class, listener);
     }
     
     /**
@@ -198,8 +200,8 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
      *            The listener to add
      */
     public void addClickListener(ClickListener listener) {
-        addListener(EventId.CLICK_EVENT_IDENTIFIER, ClickEvent.class, listener,
-                ClickListener.clickMethod);
+        addListener(EventId.CLICK_EVENT_IDENTIFIER, ClickEvent.class, 
+                listener, ClickListener.clickMethod);
     }
     
     /**
@@ -210,8 +212,7 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
      *            The listener to remove
      */
     public void removeClickListener(ClickListener listener) {
-        removeListener(EventId.CLICK_EVENT_IDENTIFIER, ClickEvent.class,
-                listener);
+        removeListener(EventId.CLICK_EVENT_IDENTIFIER, ClickEvent.class, listener);
     }
     
     /**

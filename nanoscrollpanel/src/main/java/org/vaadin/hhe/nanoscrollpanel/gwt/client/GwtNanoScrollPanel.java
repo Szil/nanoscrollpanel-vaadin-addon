@@ -111,7 +111,7 @@ public class GwtNanoScrollPanel extends SimplePanel {
         });
     }
     
-    protected void updateScroller() {
+    public void updateScroller() {
         if(isAttached()) nativeUpdateScroller(id);
     }
     

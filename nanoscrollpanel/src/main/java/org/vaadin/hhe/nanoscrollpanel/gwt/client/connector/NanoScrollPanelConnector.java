@@ -59,6 +59,11 @@ public class NanoScrollPanelConnector extends AbstractSingleComponentContainerCo
         public void scrollTo(String widgetId) {
             getWidget().scrollTo(widgetId);
         }
+
+        @Override
+        public void updateScroller() {
+            getWidget().updateScroller();
+        }
         
     };
     

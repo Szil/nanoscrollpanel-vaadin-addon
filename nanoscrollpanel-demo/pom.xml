@@ -2,11 +2,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.vaadin.addons</groupId>
   <artifactId>nanoscrollpanel-demo</artifactId>
-  <version>0.1.6</version>
+  <version>0.1.7</version>
   <packaging>war</packaging>
   
   <properties>
-        <nanoscrollpanel.version>1.1.6</nanoscrollpanel.version>
+        <nanoscrollpanel.version>1.1.7</nanoscrollpanel.version>
         <Implementation-Version>${project.version}</Implementation-Version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

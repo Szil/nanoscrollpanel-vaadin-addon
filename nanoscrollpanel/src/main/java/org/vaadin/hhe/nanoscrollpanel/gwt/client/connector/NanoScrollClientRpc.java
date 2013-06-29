@@ -26,6 +26,11 @@ public interface NanoScrollClientRpc extends com.vaadin.shared.communication.Cli
     void scrollTo(String compId);
     
     /**
+     * Update scroller shape
+     */
+    void updateScroller();
+    
+    /**
      * Destroys nanoScroller and restores browser's native scrollbar.
      */
     void destory();

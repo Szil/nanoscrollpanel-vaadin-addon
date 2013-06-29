@@ -172,6 +172,16 @@ public class NanoScrollPanel extends AbstractSingleComponentContainer {
     }
     
     /**
+     * Update scrolller when content scrollHeight changes. {@code GwtNanoScrollPanel} can auto update scroller height 
+     * when the scrollHeight change was caused by child element directly added into content div. However, if the 
+     * scrollHeight change was caused by child element indirectly added into content div, {@code GwtNanoScrollPanel} 
+     * will not update scroller height. User need to explicitly call this method to update the scroller height.
+     */
+    public void updateScroller() {
+        clientRpc.updateScroller();
+    }
+    
+    /**
      * Add nano scroll listener
      * @param listener
      */

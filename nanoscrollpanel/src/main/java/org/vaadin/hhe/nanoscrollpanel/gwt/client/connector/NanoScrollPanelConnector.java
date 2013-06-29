@@ -2,8 +2,8 @@ package org.vaadin.hhe.nanoscrollpanel.gwt.client.connector;
 
 import org.vaadin.hhe.nanoscrollpanel.NanoScrollPanel;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.GwtNanoScrollPanel;
-import org.vaadin.hhe.nanoscrollpanel.gwt.client.NanoScrollEvent;
-import org.vaadin.hhe.nanoscrollpanel.gwt.client.NanoScrollListener;
+import org.vaadin.hhe.nanoscrollpanel.gwt.client.GwtNanoScrollEvent;
+import org.vaadin.hhe.nanoscrollpanel.gwt.client.GwtNanoScrollListener;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.shared.NanoEventId;
 import org.vaadin.hhe.nanoscrollpanel.gwt.client.shared.NanoScrollPanelState;
 
@@ -73,15 +73,15 @@ public class NanoScrollPanelConnector extends AbstractSingleComponentContainerCo
         registerRpc(NanoScrollClientRpc.class, clientRpc);
         
         // add listener
-        getWidget().addNanoScrollListener(new NanoScrollListener() {
+        getWidget().addNanoScrollListener(new GwtNanoScrollListener() {
             @Override
-            public void onScrollTop(NanoScrollEvent e) {
+            public void onScrollTop(GwtNanoScrollEvent e) {
                 if(hasEventListener(NanoEventId.NANO_SCROLL))
                     serverRpc.scrollTop();
             }
             
             @Override
-            public void onScrollEnd(NanoScrollEvent e) {
+            public void onScrollEnd(GwtNanoScrollEvent e) {
                 if(hasEventListener(NanoEventId.NANO_SCROLL))
                     serverRpc.scrollEnd();
             }

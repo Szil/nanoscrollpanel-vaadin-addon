@@ -23,7 +23,7 @@ public class GwtNanoScrollPanel extends SimplePanel {
     
     private final JSONObject scrollerOptions = new JSONObject();
     
-    private List<NanoScrollListener> listeners = new ArrayList<NanoScrollListener>();
+    private List<GwtNanoScrollListener> listeners = new ArrayList<GwtNanoScrollListener>();
     
     private String id;
     
@@ -64,35 +64,35 @@ public class GwtNanoScrollPanel extends SimplePanel {
     }
     
     public void setFlashDelay(int flashDelay) {
-        setIntegerOption(NanoScrollOption.FLASH_DELAY.toString(), flashDelay);
+        setIntegerOption(GwtNanoScrollOption.FLASH_DELAY.toString(), flashDelay);
     }
     
     public void setPreventPageScrolling(boolean isPreventPageScrolling) {
-        setBooleanOption(NanoScrollOption.PREVENT_PAGE_SCROLLING.toString(), isPreventPageScrolling);
+        setBooleanOption(GwtNanoScrollOption.PREVENT_PAGE_SCROLLING.toString(), isPreventPageScrolling);
     }
     
     public void setAlwaysVisible(boolean isAlwaysVisible) {
-        setBooleanOption(NanoScrollOption.ALWAYS_VISIBLE.toString(), isAlwaysVisible);
+        setBooleanOption(GwtNanoScrollOption.ALWAYS_VISIBLE.toString(), isAlwaysVisible);
     }
     
     public void setIOSNativeScrolling(boolean iOSNativeScrolling) {
-        setBooleanOption(NanoScrollOption.IOS_NATIVE_SCROLLING.toString(), iOSNativeScrolling);
+        setBooleanOption(GwtNanoScrollOption.IOS_NATIVE_SCROLLING.toString(), iOSNativeScrolling);
     }
     
     public void setDisableResize(boolean disableResize) {
-        setBooleanOption(NanoScrollOption.DISABLE_RESIZE.toString(), disableResize);
+        setBooleanOption(GwtNanoScrollOption.DISABLE_RESIZE.toString(), disableResize);
     }
     
     public void setPanelClassName(String className) {
-        setStringOption(NanoScrollOption.PANEL_CLASS.toString(), className);
+        setStringOption(GwtNanoScrollOption.PANEL_CLASS.toString(), className);
     }
     
     public void setSliderClassName(String className) {
-        setStringOption(NanoScrollOption.SLIDER_CLASS.toString(), className);
+        setStringOption(GwtNanoScrollOption.SLIDER_CLASS.toString(), className);
     }
     
     public void setContentClassName(String className) {
-        setStringOption(NanoScrollOption.CONTENT_CLASS.toString(), className);
+        setStringOption(GwtNanoScrollOption.CONTENT_CLASS.toString(), className);
     }
     
     @Override
@@ -126,24 +126,24 @@ public class GwtNanoScrollPanel extends SimplePanel {
         destroyScroller();
     }
     
-    public void addNanoScrollListener(NanoScrollListener l) {
+    public void addNanoScrollListener(GwtNanoScrollListener l) {
         listeners.add(l);
     }
     
-    public void removeNanoScrollListener(NanoScrollListener l) {
+    public void removeNanoScrollListener(GwtNanoScrollListener l) {
         listeners.remove(l);
     }
     
     private void onScrollEnd(Event e) {
-        NanoScrollEvent nanoEvent = new NanoScrollEvent(e, this);
-        for(NanoScrollListener l : listeners) {
+        GwtNanoScrollEvent nanoEvent = new GwtNanoScrollEvent(e, this);
+        for(GwtNanoScrollListener l : listeners) {
             l.onScrollEnd(nanoEvent);
         }
     }
     
     private void onScrollTop(Event e) {
-        NanoScrollEvent nanoEvent = new NanoScrollEvent(e, this);
-        for(NanoScrollListener l : listeners) {
+        GwtNanoScrollEvent nanoEvent = new GwtNanoScrollEvent(e, this);
+        for(GwtNanoScrollListener l : listeners) {
             l.onScrollTop(nanoEvent);
         }
     }

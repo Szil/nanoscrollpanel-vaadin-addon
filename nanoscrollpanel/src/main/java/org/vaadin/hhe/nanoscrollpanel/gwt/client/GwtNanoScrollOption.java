@@ -1,6 +1,6 @@
 package org.vaadin.hhe.nanoscrollpanel.gwt.client;
 
-public enum NanoScrollOption {
+public enum GwtNanoScrollOption {
     /**
      * A classname for scrollbar track element. If you change this setting, 
      * you also have to change it in the plugin's CSS file.
@@ -67,7 +67,7 @@ public enum NanoScrollOption {
     
     private String optionName;
 
-    private NanoScrollOption(String name) {
+    private GwtNanoScrollOption(String name) {
         this.optionName = name;
     }
 

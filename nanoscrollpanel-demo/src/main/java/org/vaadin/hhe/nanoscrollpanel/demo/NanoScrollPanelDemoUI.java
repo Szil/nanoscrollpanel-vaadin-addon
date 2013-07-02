@@ -9,8 +9,10 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Component;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -52,7 +54,7 @@ public class NanoScrollPanelDemoUI extends UI {
         
         final VerticalLayout vLayout = new VerticalLayout();
         for(int i=0; i<50; ++i) {
-            Label l = new Label("This is a test "+i+".");
+            Label l = new Label("This is a example of NanoScrollPanel "+i+".");
             l.setId("Label"+i);
             if(i==25) scrollToTarget = l;
             vLayout.addComponent(l);
@@ -97,8 +99,8 @@ public class NanoScrollPanelDemoUI extends UI {
         
         nPanel.setContent(vLayout);
         
-        VerticalLayout overallLayout = new VerticalLayout();
-        overallLayout.addComponent(nPanel);
+        VerticalLayout nanoScrollLayout = new VerticalLayout();
+        nanoScrollLayout.addComponent(nPanel);
         
         Button flashBtn = new Button("Flash Scrollbar");
         flashBtn.addClickListener(new ClickListener() {
@@ -107,7 +109,7 @@ public class NanoScrollPanelDemoUI extends UI {
                 nPanel.flashScrollbar();
             }
         });
-        overallLayout.addComponent(flashBtn);
+        nanoScrollLayout.addComponent(flashBtn);
         
         Button scrollTopBtn = new Button("Scroll To Top");
         scrollTopBtn.addClickListener(new ClickListener() {
@@ -117,7 +119,7 @@ public class NanoScrollPanelDemoUI extends UI {
                 nPanel.scrollToTop();
             }
         });
-        overallLayout.addComponent(scrollTopBtn);
+        nanoScrollLayout.addComponent(scrollTopBtn);
         
         Button scrollBottomBtn = new Button("Scroll To Bottom");
         scrollBottomBtn.addClickListener(new ClickListener() {
@@ -127,7 +129,7 @@ public class NanoScrollPanelDemoUI extends UI {
                 nPanel.scrollToBottom();
             }
         });
-        overallLayout.addComponent(scrollBottomBtn);
+        nanoScrollLayout.addComponent(scrollBottomBtn);
         
         Button scrollToBtn = new Button("Scroll To 25");
         scrollToBtn.addClickListener(new ClickListener() {
@@ -137,8 +139,26 @@ public class NanoScrollPanelDemoUI extends UI {
                 nPanel.scrollTo(scrollToTarget);
             }
         });
-        overallLayout.addComponent(scrollToBtn);
+        nanoScrollLayout.addComponent(scrollToBtn);
         
-        setContent(overallLayout);
+        
+        HorizontalLayout hLayout = new HorizontalLayout();
+        hLayout.addComponent(nanoScrollLayout);
+        
+        Panel normalPanel = new Panel();
+        normalPanel.setWidth("400px");
+        normalPanel.setHeight("400px");
+        final VerticalLayout normalPanelContentLayout = new VerticalLayout();
+        normalPanelContentLayout.setMargin(true);
+        for(int i=0; i<50; ++i) {
+            Label l = new Label("This is a example of Normal Panel "+i+".");
+            l.setId("Label"+i);
+            if(i==25) scrollToTarget = l;
+            normalPanelContentLayout.addComponent(l);
+        }
+        normalPanel.setContent(normalPanelContentLayout);
+        hLayout.addComponent(normalPanel);
+        
+        setContent(hLayout);
     }
 }

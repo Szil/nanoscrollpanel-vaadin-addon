@@ -151,10 +151,7 @@ public class NanoScrollPanelDemoUI extends UI {
         final VerticalLayout normalPanelContentLayout = new VerticalLayout();
         normalPanelContentLayout.setMargin(true);
         for(int i=0; i<50; ++i) {
-            Label l = new Label("This is a example of Normal Panel "+i+".");
-            l.setId("Label"+i);
-            if(i==25) scrollToTarget = l;
-            normalPanelContentLayout.addComponent(l);
+            normalPanelContentLayout.addComponent(new Label("This is a example of Normal Panel "+i+"."));
         }
         normalPanel.setContent(normalPanelContentLayout);
         hLayout.addComponent(normalPanel);

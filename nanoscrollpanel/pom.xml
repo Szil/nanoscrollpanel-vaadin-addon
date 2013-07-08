@@ -100,7 +100,7 @@
 							<!-- Package format version - do not change -->
 							<Vaadin-Package-Version>1</Vaadin-Package-Version>
 							<Vaadin-License-Title>${Vaadin-License-Title}</Vaadin-License-Title>
-							<Vaadin-Widgetsets>org.vaadin.hhe.nanoscrollpanel.gwt.NanoScrollPanelWidgetSet</Vaadin-Widgetsets>
+							<Vaadin-Widgetsets>org.vaadin.hhe.nanoscrollpanel.gwt.NanoScrollPanelWidgetset</Vaadin-Widgetsets>
 						</manifestEntries>
 					</archive>
 				</configuration>
@@ -112,7 +112,7 @@
                 <version>${vaadin.plugin.version}</version>
                 <configuration>
                     <modules>
-                        <module>org.vaadin.hhe.nanoscrollpanel.gwt.NanoScrollPanelWidgetSet</module>
+                        <module>org.vaadin.hhe.nanoscrollpanel.gwt.NanoScrollPanelWidgetset</module>
                     </modules>
                     <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
                     <runTarget>xsite</runTarget>
